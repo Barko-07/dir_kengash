@@ -166,9 +166,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 import os
-if not os.path.exists(BASE_DIR / 'static'):
-    os.makedirs(BASE_DIR / 'static')
-
+try:
+    if not os.path.exists(BASE_DIR / 'static'):
+        os.makedirs(BASE_DIR / 'static')
+except OSError:
+    pass
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
