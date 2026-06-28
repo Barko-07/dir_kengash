@@ -35,15 +35,24 @@ def login_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        if not User.objects.filter(username=username).exists():
-            user = User.objects.create_user(username=username, email=email, password=password)
-            login(request, user)
-            return redirect('dashboard')
-        else:
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '').strip()
+        role = request.POST.get('role', 'direktor')
+
+        if not username:
+            return render(request, 'register.html', {'error': 'Foydalanuvchi nomi kiritilishi shart'})
+        if not password:
+            return render(request, 'register.html', {'error': 'Parol kiritilishi shart'})
+
+        if User.objects.filter(username=username).exists():
             return render(request, 'register.html', {'error': 'Bu foydalanuvchi nomi band'})
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.role = role
+        user.save()
+        login(request, user)
+        return redirect('dashboard')
     return render(request, 'register.html')
 
 def logout_view(request):
