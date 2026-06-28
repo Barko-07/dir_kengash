@@ -46,3 +46,4 @@ wcwidth==0.8.1
 
 django-jazzmin
 dj-database-url==2.1.0
+whitenoise==6.7.0
