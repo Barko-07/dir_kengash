@@ -1,0 +1,62 @@
+{% extends 'admin_base.html' %}
+{% block title %}Foydalanuvchini tahrirlash{% endblock %}
+{% block content %}
+<div class="flex items-center gap-4 mb-8">
+    <a href="{% url 'admin_users' %}" class="w-9 h-9 rounded-xl bg-slate-700 hover:bg-slate-600 flex items-center justify-center text-slate-300 transition-colors">
+        <i class="fa-solid fa-arrow-left text-sm"></i>
+    </a>
+    <div>
+        <h1 class="text-2xl font-extrabold text-white mb-0.5">Foydalanuvchini tahrirlash</h1>
+        <p class="text-slate-500 text-sm">{{ edited_user.username }}</p>
+    </div>
+</div>
+<div class="max-w-xl">
+    <div class="bg-slate-800/50 border border-white/5 rounded-2xl p-8">
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            <div class="grid grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-slate-400 text-sm font-semibold mb-2">Login</label>
+                    {{ form.username }}
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm font-semibold mb-2">Email</label>
+                    {{ form.email }}
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm font-semibold mb-2">Ism</label>
+                    {{ form.first_name }}
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm font-semibold mb-2">Familiya</label>
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-slate-400 text-sm font-semibold mb-2">Rol</label>
+                    {{ form.role }}
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm font-semibold mb-2">Telefon</label>
+                    {{ form.phone_number }}
+                </div>
+            </div>
+            <div class="flex gap-6 pt-2">
+                <div class="flex items-center gap-3">
+                    {{ form.is_active }}
+                    <label class="text-slate-300 text-sm">Faol</label>
+                </div>
+                <div class="flex items-center gap-3">
+                    {{ form.is_staff }}
+                    <label class="text-slate-300 text-sm">Admin huquqi</label>
+                </div>
+            </div>
+            <div class="flex gap-3 pt-4 border-t border-white/5">
+                <button type="submit" class="btn-admin-primary"><i class="fa-solid fa-save"></i> Saqlash</button>
+                <a href="{% url 'admin_users' %}" class="btn-admin-edit">Bekor qilish</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

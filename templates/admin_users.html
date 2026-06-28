@@ -1,0 +1,75 @@
+{% extends 'admin_base.html' %}
+{% block title %}Foydalanuvchilar{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-8">
+    <div>
+        <h1 class="text-2xl font-extrabold text-white mb-1">Foydalanuvchilar</h1>
+        <p class="text-slate-500 text-sm">Jami: {{ users.count }} foydalanuvchi</p>
+    </div>
+</div>
+
+<form method="get" class="mb-6 flex gap-3">
+    <div class="relative flex-1 max-w-sm">
+        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+        <input type="text" name="q" value="{{ q }}" class="admin-input pl-11" placeholder="Login yoki email bo'yicha...">
+    </div>
+    <button type="submit" class="btn-admin-primary">Qidirish</button>
+    {% if q %}<a href="{% url 'admin_users' %}" class="btn-admin-edit">Tozalash</a>{% endif %}
+</form>
+
+<div class="bg-slate-800/50 border border-white/5 rounded-2xl overflow-hidden">
+    <table class="w-full">
+        <thead>
+            <tr class="border-b border-white/5">
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">#</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Foydalanuvchi</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Rol</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Telefon</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Holat</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+            <tr class="table-row border-b border-white/5 last:border-0">
+                <td class="px-6 py-4 text-slate-500 text-sm">{{ forloop.counter }}</td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-indigo-600/30 flex items-center justify-center text-indigo-400 font-bold text-sm">
+                            {{ u.username|first|upper }}
+                        </div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">{{ u.username }}</div>
+                            <div class="text-slate-500 text-xs">{{ u.email|default:"—" }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="badge {% if u.is_staff %}badge-blue{% else %}badge-green{% endif %}">
+                        {% if u.is_staff %}Admin{% else %}{{ u.get_role_display }}{% endif %}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-slate-400 text-sm">{{ u.phone_number|default:"—" }}</td>
+                <td class="px-6 py-4">
+                    <span class="badge {% if u.is_active %}badge-green{% else %}badge-red{% endif %}">
+                        {% if u.is_active %}Faol{% else %}Bloklangan{% endif %}
+                    </span>
+                </td>
+                <td class="px-6 py-4 flex gap-2">
+                    <a href="{% url 'admin_user_edit' u.pk %}" class="btn-admin-edit">
+                        <i class="fa-solid fa-pen-to-square"></i> Tahrirlash
+                    </a>
+                    {% if u != request.user %}
+                    <a href="{% url 'admin_user_delete' u.pk %}" class="btn-admin-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="px-6 py-12 text-center text-slate-500">Foydalanuvchi topilmadi.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

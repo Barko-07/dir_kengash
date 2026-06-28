@@ -1,0 +1,68 @@
+{% extends 'admin_base.html' %}
+{% block title %}Kengash a'zolari{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-8">
+    <div>
+        <h1 class="text-2xl font-extrabold text-white mb-1">Kengash a'zolari</h1>
+        <p class="text-slate-500 text-sm">Jami: {{ members.count }} a'zo</p>
+    </div>
+    <a href="{% url 'admin_member_create' %}" class="btn-admin-primary">
+        <i class="fa-solid fa-plus"></i> Yangi a'zo qo'shish
+    </a>
+</div>
+
+<!-- Search -->
+<form method="get" class="mb-6 flex gap-3">
+    <div class="relative flex-1 max-w-sm">
+        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+        <input type="text" name="q" value="{{ q }}" class="admin-input pl-11" placeholder="Ism yoki lavozim bo'yicha qidirish...">
+    </div>
+    <button type="submit" class="btn-admin-primary">Qidirish</button>
+    {% if q %}<a href="{% url 'admin_members' %}" class="btn-admin-edit">Tozalash</a>{% endif %}
+</form>
+
+<div class="bg-slate-800/50 border border-white/5 rounded-2xl overflow-hidden">
+    <table class="w-full">
+        <thead>
+            <tr class="border-b border-white/5">
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">#</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">A'zo</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Lavozim</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Viloyat</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Holat</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in members %}
+            <tr class="table-row border-b border-white/5 last:border-0">
+                <td class="px-6 py-4 text-slate-500 text-sm">{{ forloop.counter }}</td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <img src="{{ m.get_photo }}" class="w-10 h-10 rounded-full object-cover border border-white/10">
+                        <div class="text-white font-semibold text-sm">{{ m.full_name }}</div>
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-slate-300 text-sm">{{ m.position }}</td>
+                <td class="px-6 py-4 text-slate-400 text-sm">{{ m.region|default:"—" }}</td>
+                <td class="px-6 py-4">
+                    <span class="badge {% if m.is_active %}badge-green{% else %}badge-red{% endif %}">
+                        {% if m.is_active %}Faol{% else %}Yashirin{% endif %}
+                    </span>
+                </td>
+                <td class="px-6 py-4 flex gap-2">
+                    <a href="{% url 'admin_member_edit' m.pk %}" class="btn-admin-edit">
+                        <i class="fa-solid fa-pen-to-square"></i> Tahrirlash
+                    </a>
+                    <a href="{% url 'admin_member_delete' m.pk %}" class="btn-admin-danger">
+                        <i class="fa-solid fa-trash"></i> O'chirish
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="px-6 py-12 text-center text-slate-500">Hali a'zo qo'shilmagan.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

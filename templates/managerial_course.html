@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="animate-slide-up">
+    <!-- Hero Section for Course -->
+    <div class="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 to-slate-800 shadow-xl p-10 md:p-16 mb-16 flex flex-col items-center text-center text-white border border-slate-700/50">
+        <div class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-blue-500/30 rounded-full blur-[80px]"></div>
+        <div class="absolute bottom-0 left-0 -ml-32 -mb-32 w-80 h-80 bg-indigo-500/30 rounded-full blur-[80px]"></div>
+
+        <div class="relative z-10 max-w-3xl">
+            <div class="inline-flex items-center gap-2 bg-blue-500/20 text-blue-200 px-4 py-2 rounded-full border border-blue-400/30 mb-8 shadow-sm text-sm font-semibold tracking-wide backdrop-blur-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-400"></span>
+                </span>
+                Xalqaro Standartlar Asosida
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.15] tracking-tight mb-6">
+                Zamonaviy Ta'lim Muassasalari Uchun <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Menejerlik Kursi</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
+                Maktab direktorlari va ta'lim sohasi rahbarlari uchun mo'ljallangan transformatsion malaka oshirish dasturi.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#enroll" class="bg-blue-600 hover:bg-blue-500 text-white text-base px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2">
+                    Kursga yozilish <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <a href="#syllabus" class="bg-white/10 hover:bg-white/20 text-white text-base px-8 py-4 rounded-xl font-bold border border-white/10 transition-all backdrop-blur-sm flex items-center justify-center gap-2">
+                    Dastur bilan tanishish
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats & Info -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div class="bg-white rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-sm border border-slate-200 hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-clock"></i></div>
+            <div class="text-2xl font-extrabold text-slate-900 mb-1">4 Hafta</div>
+            <div class="text-slate-500 text-sm font-medium">Intensiv davomiylik</div>
+        </div>
+        <div class="bg-white rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-sm border border-slate-200 hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="text-2xl font-extrabold text-slate-900 mb-1">12 Modul</div>
+            <div class="text-slate-500 text-sm font-medium">Nazariya va amaliyot</div>
+        </div>
+        <div class="bg-white rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-sm border border-slate-200 hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-certificate"></i></div>
+            <div class="text-2xl font-extrabold text-slate-900 mb-1">Sertifikat</div>
+            <div class="text-slate-500 text-sm font-medium">Xalqaro darajadagi</div>
+        </div>
+        <div class="bg-white rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-sm border border-slate-200 hover:-translate-y-1 transition-transform">
+            <div class="w-12 h-12 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-users"></i></div>
+            <div class="text-2xl font-extrabold text-slate-900 mb-1">50+</div>
+            <div class="text-slate-500 text-sm font-medium">Bitiruvchilar</div>
+        </div>
+    </div>
+
+    <!-- Syllabus / Curriculum -->
+    <div id="syllabus" class="mb-20 pt-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Kurs Dasturi</h2>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">Har bir modul ta'lim sifatini oshirish va menejmentdagi zamonaviy muammolarni hal etishga qaratilgan.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Modul 1 -->
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-blue-300 transition-colors">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                <div class="relative z-10">
+                    <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2 block">Modul 1</span>
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-3">Transformatsion Liderlik</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">Rahbarlik uslublarini baholash, xodimlarni ilhomlantirish va jamoani yagona maqsad sari yetaklash ko'nikmalari.</p>
+                    <ul class="space-y-2 text-sm text-slate-500 font-medium">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Liderlik psixologiyasi</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Mojarolarni hal etish</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Modul 2 -->
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-indigo-300 transition-colors">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                <div class="relative z-10">
+                    <span class="text-indigo-600 font-bold text-sm tracking-widest uppercase mb-2 block">Modul 2</span>
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-3">Moliyaviy Savodxonlik</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">Maktab budjetini rejalashtirish, mablag'larni optimallashtirish va xususiy investitsiyalarni jalb qilish.</p>
+                    <ul class="space-y-2 text-sm text-slate-500 font-medium">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Budjet nazorati</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Grantlar yozish</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Modul 3 -->
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-orange-300 transition-colors">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-orange-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                <div class="relative z-10">
+                    <span class="text-orange-600 font-bold text-sm tracking-widest uppercase mb-2 block">Modul 3</span>
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-3">Ta'limni Raqamlashtirish</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">Maktab boshqaruvini ERP tizimlariga o'tkazish, elektron jurnallar va sun'iy intellektdan foydalanish.</p>
+                    <ul class="space-y-2 text-sm text-slate-500 font-medium">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> IT infratuzilma</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Ma'lumotlar tahlili</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Modul 4 -->
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-green-300 transition-colors">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                <div class="relative z-10">
+                    <span class="text-green-600 font-bold text-sm tracking-widest uppercase mb-2 block">Modul 4</span>
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-3">Inqirozni Boshqarish</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">Favqulodda vaziyatlarda to'g'ri qaror qabul qilish, jamoatchilik bilan ishlash (PR) va ota-onalar bilan aloqalar.</p>
+                    <ul class="space-y-2 text-sm text-slate-500 font-medium">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Stress-menejment</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> PR strategiyasi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enrollment Form / CTA -->
+    <div id="enroll" class="bg-white rounded-[2.5rem] border border-slate-200 shadow-xl overflow-hidden flex flex-col lg:flex-row mb-12">
+        <!-- Left: Info -->
+        <div class="lg:w-2/5 bg-slate-50 p-10 md:p-12 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-center relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 opacity-5"><i class="fa-solid fa-graduation-cap text-9xl"></i></div>
+            <div class="relative z-10">
+                <h3 class="text-3xl font-extrabold text-slate-900 mb-4">Ro'yxatdan o'tish</h3>
+                <p class="text-slate-500 mb-8 leading-relaxed">Kelasi oqim uchun qabul jarayoni boshlandi. Joylar soni cheklangan, shuning uchun hoziroq band qiling.</p>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-calendar-days"></i></div>
+                        <div>
+                            <div class="font-bold text-slate-800">Keyingi oqim</div>
+                            <div class="text-slate-500 text-sm">15-Sentabr, 2026</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <div class="font-bold text-slate-800">Format</div>
+                            <div class="text-slate-500 text-sm">Gibrid (Online + Offline)</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-money-bill-wave"></i></div>
+                        <div>
+                            <div class="font-bold text-slate-800">To'lov</div>
+                            <div class="text-slate-500 text-sm">Grant va shartnoma asosida</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right: Form -->
+        <div class="lg:w-3/5 p-10 md:p-12 bg-white">
+            <form class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-slate-700 text-sm font-bold mb-2 ml-1">Ism va familiya</label>
+                        <input type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 focus:bg-white transition-all shadow-sm" placeholder="F.I.SH">
+                    </div>
+                    <div>
+                        <label class="block text-slate-700 text-sm font-bold mb-2 ml-1">Telefon raqam</label>
+                        <input type="tel" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 focus:bg-white transition-all shadow-sm" placeholder="+998 (__) ___-__-__">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-700 text-sm font-bold mb-2 ml-1">Lavozim va muassasa</label>
+                    <input type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 focus:bg-white transition-all shadow-sm" placeholder="Masalan: 1-maktab direktori">
+                </div>
+                <div>
+                    <label class="block text-slate-700 text-sm font-bold mb-2 ml-1">Nima uchun ushbu kursda o'qimoqchisiz?</label>
+                    <textarea rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 focus:bg-white transition-all shadow-sm resize-none" placeholder="Qisqacha maqsadingizni yozing..."></textarea>
+                </div>
+                <button type="button" onclick="alert('So\'rov muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-500/25 flex justify-center items-center gap-2 group">
+                    So'rov yuborish <i class="fa-solid fa-paper-plane group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'admin_base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-2xl font-extrabold text-white mb-1">Dashboard</h1>
+    <p class="text-slate-500 text-sm">Umumiy ko'rinish va statistika</p>
+</div>
+
+<!-- Stat Cards -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="stat-card flex flex-col gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg"><i class="fa-solid fa-users"></i></div>
+        <div class="text-3xl font-extrabold text-white">{{ total_users }}</div>
+        <div class="text-slate-400 text-sm font-medium">Foydalanuvchilar</div>
+    </div>
+    <div class="stat-card flex flex-col gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-lg"><i class="fa-solid fa-id-badge"></i></div>
+        <div class="text-3xl font-extrabold text-white">{{ active_members }}<span class="text-slate-500 text-lg">/{{ total_members }}</span></div>
+        <div class="text-slate-400 text-sm font-medium">Faol a'zolar</div>
+    </div>
+    <div class="stat-card flex flex-col gap-3">
+        <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-lg"><i class="fa-solid fa-newspaper"></i></div>
+        <div class="text-3xl font-extrabold text-white">{{ published_news }}<span class="text-slate-500 text-lg">/{{ total_news }}</span></div>
+        <div class="text-slate-400 text-sm font-medium">Nashr qilingan</div>
+    </div>
+    <div class="stat-card flex flex-col gap-3">
+        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="text-3xl font-extrabold text-white">{{ active_courses }}<span class="text-slate-500 text-lg">/{{ total_courses }}</span></div>
+        <div class="text-slate-400 text-sm font-medium">Faol kurslar</div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Recent Users -->
+    <div class="bg-slate-800/50 border border-white/5 rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-5">
+            <h2 class="text-white font-bold">So'nggi foydalanuvchilar</h2>
+            <a href="{% url 'admin_users' %}" class="text-indigo-400 text-xs hover:text-indigo-300">Barchasi →</a>
+        </div>
+        <div class="space-y-3">
+            {% for u in recent_users %}
+            <div class="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 text-sm font-bold">
+                        {{ u.username|first|upper }}
+                    </div>
+                    <div>
+                        <div class="text-white text-sm font-medium">{{ u.username }}</div>
+                        <div class="text-slate-500 text-xs">{{ u.get_role_display }}</div>
+                    </div>
+                </div>
+                <span class="badge {% if u.is_active %}badge-green{% else %}badge-red{% endif %}">
+                    {% if u.is_active %}Faol{% else %}Bloklangan{% endif %}
+                </span>
+            </div>
+            {% empty %}
+            <p class="text-slate-500 text-sm">Hali foydalanuvchi yo'q.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Recent News -->
+    <div class="bg-slate-800/50 border border-white/5 rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-5">
+            <h2 class="text-white font-bold">So'nggi yangiliklar</h2>
+            <a href="{% url 'admin_news' %}" class="text-indigo-400 text-xs hover:text-indigo-300">Barchasi →</a>
+        </div>
+        <div class="space-y-3">
+            {% for n in recent_news %}
+            <div class="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                <div class="text-white text-sm font-medium truncate max-w-[200px]">{{ n.title }}</div>
+                <span class="badge {% if n.is_published %}badge-green{% else %}badge-red{% endif %} shrink-0 ml-2">
+                    {% if n.is_published %}Nashr{% else %}Yashirin{% endif %}
+                </span>
+            </div>
+            {% empty %}
+            <p class="text-slate-500 text-sm">Hali yangilik yo'q.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Quick Links -->
+<div class="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4">
+    <a href="{% url 'admin_member_create' %}" class="stat-card text-center hover:border-indigo-500/30 cursor-pointer group">
+        <i class="fa-solid fa-user-plus text-indigo-400 text-xl mb-2 block group-hover:scale-110 transition-transform"></i>
+        <div class="text-white text-sm font-semibold">A'zo qo'shish</div>
+    </a>
+    <a href="{% url 'admin_news_create' %}" class="stat-card text-center hover:border-orange-500/30 cursor-pointer group">
+        <i class="fa-solid fa-plus text-orange-400 text-xl mb-2 block group-hover:scale-110 transition-transform"></i>
+        <div class="text-white text-sm font-semibold">Yangilik qo'shish</div>
+    </a>
+    <a href="{% url 'admin_gallery_create' %}" class="stat-card text-center hover:border-pink-500/30 cursor-pointer group">
+        <i class="fa-solid fa-image text-pink-400 text-xl mb-2 block group-hover:scale-110 transition-transform"></i>
+        <div class="text-white text-sm font-semibold">Rasm qo'shish</div>
+    </a>
+    <a href="{% url 'admin_course_create' %}" class="stat-card text-center hover:border-purple-500/30 cursor-pointer group">
+        <i class="fa-solid fa-book-open text-purple-400 text-xl mb-2 block group-hover:scale-110 transition-transform"></i>
+        <div class="text-white text-sm font-semibold">Kurs qo'shish</div>
+    </a>
+    <a href="{% url 'admin_users' %}" class="stat-card text-center hover:border-blue-500/30 cursor-pointer group">
+        <i class="fa-solid fa-users-gear text-blue-400 text-xl mb-2 block group-hover:scale-110 transition-transform"></i>
+        <div class="text-white text-sm font-semibold">Foydalanuvchilar</div>
+    </a>
+</div>
+{% endblock %}

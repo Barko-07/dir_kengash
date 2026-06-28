@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- ===== HERO SECTION ===== -->
+<div class="relative w-full overflow-hidden rounded-[2.5rem] bg-white border border-slate-200 shadow-sm p-10 md:p-16 mb-12 flex flex-col md:flex-row items-center gap-12">
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl"></div>
+
+    <div class="flex-1 relative z-10 animate-slide-up">
+        <div class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full border border-blue-100 mb-8 shadow-sm text-sm font-semibold tracking-wide">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            Rasmiy platforma
+        </div>
+        
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tight mb-6">
+            Ta'lim rahbarlari uchun <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Intellektual</span> tizim
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-500 leading-relaxed mb-10 max-w-xl font-medium">
+            Direktorlar kengashi a'zolari bilan tanishish, xalqaro tajriba asosida malaka oshirish va ta'lim sifatini yangi bosqichga olib chiqish.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="{% url 'register' %}" class="btn-primary text-base px-8 py-4">
+                Platformaga qo'shiling <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+            <a href="{% url 'board_members' %}" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:border-blue-300 hover:bg-slate-50 transition-all text-base shadow-sm">
+                Kengash a'zolari
+            </a>
+        </div>
+    </div>
+
+    <!-- Right: Visual/Feature -->
+    <div class="flex-1 relative z-10 w-full animate-fade-in delay-100">
+        <div class="glass p-8 relative shadow-2xl shadow-blue-900/5 border-white/60 bg-white/40">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                        <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-slate-900 font-bold text-lg">DirKengash</div>
+                        <div class="text-slate-500 text-sm font-medium">Boshqaruv tizimi</div>
+                    </div>
+                </div>
+                <div class="bg-green-100 text-green-700 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide">Faol</div>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 bg-white/60 p-4 rounded-2xl border border-white">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600"><i class="fa-solid fa-users"></i></div>
+                    <div class="flex-1"><div class="text-slate-800 font-semibold text-sm">A'zolar bazasi</div><div class="text-slate-400 text-xs">500+ direktorlar</div></div>
+                </div>
+                <div class="flex items-center gap-4 bg-white/60 p-4 rounded-2xl border border-white">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="flex-1"><div class="text-slate-800 font-semibold text-sm">Menejerlik kursi</div><div class="text-slate-400 text-xs">Malaka oshirish</div></div>
+                </div>
+                <div class="flex items-center gap-4 bg-white/60 p-4 rounded-2xl border border-white">
+                    <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600"><i class="fa-solid fa-newspaper"></i></div>
+                    <div class="flex-1"><div class="text-slate-800 font-semibold text-sm">Yangiliklar</div><div class="text-slate-400 text-xs">Kunlik yangilanishlar</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+        <div class="text-4xl font-extrabold text-slate-900 mb-1">500<span class="text-blue-500">+</span></div>
+        <div class="text-slate-500 text-sm font-medium">Maktab direktori</div>
+    </div>
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+        <div class="text-4xl font-extrabold text-slate-900 mb-1">14</div>
+        <div class="text-slate-500 text-sm font-medium">Viloyat va shahar</div>
+    </div>
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+        <div class="text-4xl font-extrabold text-slate-900 mb-1">30<span class="text-blue-500">+</span></div>
+        <div class="text-slate-500 text-sm font-medium">Malaka kurslari</div>
+    </div>
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+        <div class="text-4xl font-extrabold text-slate-900 mb-1">10<span class="text-blue-500">+</span></div>
+        <div class="text-slate-500 text-sm font-medium">Yillik tajriba</div>
+    </div>
+</div>
+
+<!-- ===== NEWS SECTION ===== -->
+{% if news %}
+<div class="mb-16">
+    <div class="flex justify-between items-end mb-8">
+        <div>
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-2">So'nggi yangiliklar</h2>
+            <p class="text-slate-500">Ta'lim sohasidagi so'nggi o'zgarishlar va voqealar.</p>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for n in news %}
+        <div class="bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition-all group hover:-translate-y-1 duration-300">
+            <div class="relative h-48 overflow-hidden bg-slate-100">
+                <img src="{{ n.get_image }}" alt="{{ n.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">{{ n.get_category_display }}</div>
+            </div>
+            <div class="p-6">
+                <div class="text-slate-400 text-xs font-semibold mb-3 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar"></i> {{ n.published_at|date:"d M, Y" }}
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2 line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors">{{ n.title }}</h3>
+                <p class="text-slate-500 text-sm line-clamp-3 mb-4">{{ n.content }}</p>
+                <button class="text-blue-600 font-semibold text-sm hover:text-blue-700 flex items-center gap-1 group/btn">
+                    Batafsil <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== BOARD MEMBERS PREVIEW (CIRCULAR TESTIMONIALS) ===== -->
+<div class="mb-16">
+    <div class="flex justify-between items-end mb-8">
+        <div>
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Kengash a'zolari</h2>
+            <p class="text-slate-500">Direktorlar kengashining joriy tarkibi va yetakchilar.</p>
+        </div>
+        <a href="{% url 'board_members' %}" class="hidden sm:inline-flex items-center gap-2 text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors">
+            Barchasi <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+    </div>
+
+    <!-- Circular Testimonials Container -->
+    <div class="w-full bg-slate-50 p-8 md:p-16 rounded-[2.5rem] border border-slate-200 overflow-hidden relative">
+        <div class="max-w-[1456px] mx-auto flex flex-col items-center">
+            
+            <!-- Perspective Image Container -->
+            <div id="ct-image-container" class="relative w-full h-[300px] md:h-[400px] mb-8" style="perspective: 1000px;">
+                <!-- Images will be injected here via JS -->
+            </div>
+            
+            <!-- Content Container -->
+            <div class="flex flex-col items-center text-center max-w-2xl min-h-[160px]">
+                <h3 id="ct-name" class="text-2xl font-bold text-slate-900 mb-1"></h3>
+                <p id="ct-designation" class="text-slate-500 text-sm font-medium mb-6 uppercase tracking-wider"></p>
+                <p id="ct-quote" class="text-slate-800 text-lg leading-relaxed flex flex-wrap justify-center gap-[4px]"></p>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="flex gap-4 mt-8">
+                <button id="ct-prev" class="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-blue-600 transition-colors shadow-lg group">
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                </button>
+                <button id="ct-next" class="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-blue-600 transition-colors shadow-lg group">
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== CTA ===== -->
+<div class="mb-16">
+    <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] p-12 md:p-16 text-center text-white relative overflow-hidden shadow-xl">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <i class="fa-solid fa-rocket text-4xl mb-6 text-blue-400"></i>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">Platformadan foydalanishni boshlang</h2>
+            <p class="text-slate-400 text-lg mb-10 leading-relaxed">Direktorlar kengashiga qo'shiling, so'nggi yangiliklardan xabardor bo'ling va ta'lim tizimini birgalikda rivojlantiraylik.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2">
+                    Bepul ro'yxatdan o'tish
+                </a>
+                <a href="{% url 'login' %}" class="bg-white/5 hover:bg-white/10 text-white font-bold px-8 py-4 rounded-xl border border-white/10 transition-all flex items-center justify-center gap-2">
+                    Tizimga kirish
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<style>
+/* CSS styles for Circular Testimonials clone */
+.ct-img-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 240px;
+    height: 320px;
+    margin-left: -120px;
+    margin-top: -160px;
+    transition: all 0.8s cubic-bezier(0.4, 2, 0.3, 1);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+.ct-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.word-anim {
+    display: inline-block;
+    filter: blur(10px);
+    opacity: 0;
+    transform: translateY(5px);
+    animation: fadeBlurIn 0.4s ease-in-out forwards;
+}
+@keyframes fadeBlurIn {
+    to {
+        filter: blur(0px);
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<script>
+    // Circular Testimonials Logic — Data from DB via Django template
+    const testimonials = [];
+    /* {% for m in members %} */
+    testimonials.push({
+        quote: `{{ m.bio|escapejs|default:"Kengash a'zosi" }}`,
+        name: `{{ m.full_name|escapejs }}`,
+        designation: `{{ m.position|escapejs }}`,
+        src: `{{ m.get_photo }}`
+    });
+    /* {% empty %} */
+    testimonials.push({
+        quote: "Hali ma'lumot kiritilmagan.",
+        name: "A'zo",
+        designation: "Lavozim",
+        src: "https://ui-avatars.com/api/?name=A&background=0ea5e9&color=fff"
+    });
+    /* {% endfor %} */
+
+    let activeIndex = 0;
+    const len = testimonials.length;
+    let autoplayInterval;
+    const container = document.getElementById('ct-image-container');
+
+    // Init Images
+    testimonials.forEach((t, i) => {
+        const div = document.createElement('div');
+        div.className = 'ct-img-wrapper';
+        div.id = `ct-img-${i}`;
+        const img = document.createElement('img');
+        img.src = t.src;
+        img.alt = t.name;
+        div.appendChild(img);
+        container.appendChild(div);
+    });
+
+    function calculateGap() {
+        const width = container.offsetWidth || window.innerWidth;
+        const minWidth = 1024;
+        const maxWidth = 1456;
+        const minGap = 60;
+        const maxGap = 86;
+        if (width <= minWidth) return minGap;
+        if (width >= maxWidth) return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
+        return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
+    }
+
+    function updateCarousel() {
+        const gap = calculateGap();
+        const maxStickUp = gap * 0.8;
+
+        for (let i = 0; i < len; i++) {
+            const el = document.getElementById(`ct-img-${i}`);
+            const isActive = i === activeIndex;
+            const isLeft = (activeIndex - 1 + len) % len === i;
+            const isRight = (activeIndex + 1) % len === i;
+
+            if (isActive) {
+                el.style.zIndex = 3;
+                el.style.opacity = 1;
+                el.style.transform = `translateX(0px) translateY(0px) scale(1) rotateY(0deg)`;
+            } else if (isLeft) {
+                el.style.zIndex = 2;
+                el.style.opacity = 1;
+                el.style.transform = `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`;
+            } else if (isRight) {
+                el.style.zIndex = 2;
+                el.style.opacity = 1;
+                el.style.transform = `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`;
+            } else {
+                el.style.zIndex = 1;
+                el.style.opacity = 0;
+                el.style.transform = `scale(0.8)`;
+            }
+        }
+
+        updateContent();
+    }
+
+    function updateContent() {
+        const t = testimonials[activeIndex];
+        
+        // Update texts directly
+        document.getElementById('ct-name').textContent = t.name;
+        document.getElementById('ct-designation').textContent = t.designation;
+        
+        // Words animation
+        const quoteEl = document.getElementById('ct-quote');
+        quoteEl.innerHTML = '';
+        const words = t.quote.split(' ');
+        
+        words.forEach((word, index) => {
+            const span = document.createElement('span');
+            span.textContent = word;
+            span.className = 'word-anim';
+            span.style.animationDelay = `${index * 0.03}s`;
+            quoteEl.appendChild(span);
+        });
+    }
+
+    function handleNext() {
+        activeIndex = (activeIndex + 1) % len;
+        updateCarousel();
+        resetAutoplay();
+    }
+
+    function handlePrev() {
+        activeIndex = (activeIndex - 1 + len) % len;
+        updateCarousel();
+        resetAutoplay();
+    }
+
+    function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(handleNext, 5000);
+    }
+
+    document.getElementById('ct-next').addEventListener('click', handleNext);
+    document.getElementById('ct-prev').addEventListener('click', handlePrev);
+    window.addEventListener('resize', updateCarousel);
+
+    // Initial call
+    updateCarousel();
+    resetAutoplay();
+
+</script>
+{% endblock %}

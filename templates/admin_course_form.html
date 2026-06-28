@@ -1,0 +1,37 @@
+{% extends 'admin_base.html' %}
+{% block title %}{{ action }} — Kurs{% endblock %}
+{% block content %}
+<div class="flex items-center gap-4 mb-8">
+    <a href="{% url 'admin_courses' %}" class="w-9 h-9 rounded-xl bg-slate-700 hover:bg-slate-600 flex items-center justify-center text-slate-300 transition-colors">
+        <i class="fa-solid fa-arrow-left text-sm"></i>
+    </a>
+    <h1 class="text-2xl font-extrabold text-white">{{ action }} — Kurs</h1>
+</div>
+<div class="max-w-lg">
+    <div class="bg-slate-800/50 border border-white/5 rounded-2xl p-8">
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            <div>
+                <label class="block text-slate-400 text-sm font-semibold mb-2">Kurs nomi *</label>
+                {{ form.title }}
+            </div>
+            <div>
+                <label class="block text-slate-400 text-sm font-semibold mb-2">Tavsif *</label>
+                {{ form.description }}
+            </div>
+            <div>
+                <label class="block text-slate-400 text-sm font-semibold mb-2">O'qituvchi</label>
+                {{ form.instructor }}
+            </div>
+            <div class="flex items-center gap-3 pt-2">
+                {{ form.is_active }}
+                <label class="text-slate-300 text-sm">Faol holat</label>
+            </div>
+            <div class="flex gap-3 pt-4 border-t border-white/5">
+                <button type="submit" class="btn-admin-primary"><i class="fa-solid fa-save"></i> Saqlash</button>
+                <a href="{% url 'admin_courses' %}" class="btn-admin-edit">Bekor qilish</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

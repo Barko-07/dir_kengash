@@ -1,0 +1,50 @@
+{% extends 'admin_base.html' %}
+{% block title %}Kurslar{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-8">
+    <div>
+        <h1 class="text-2xl font-extrabold text-white mb-1">Kurslar</h1>
+        <p class="text-slate-500 text-sm">Jami: {{ courses.count }} kurs</p>
+    </div>
+    <a href="{% url 'admin_course_create' %}" class="btn-admin-primary">
+        <i class="fa-solid fa-plus"></i> Kurs qo'shish
+    </a>
+</div>
+<div class="bg-slate-800/50 border border-white/5 rounded-2xl overflow-hidden">
+    <table class="w-full">
+        <thead>
+            <tr class="border-b border-white/5">
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">#</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Kurs nomi</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">O'qituvchi</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Holat</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in courses %}
+            <tr class="table-row border-b border-white/5 last:border-0">
+                <td class="px-6 py-4 text-slate-500 text-sm">{{ forloop.counter }}</td>
+                <td class="px-6 py-4 text-white text-sm font-medium">{{ c.title }}</td>
+                <td class="px-6 py-4 text-slate-400 text-sm">{{ c.instructor|default:"—" }}</td>
+                <td class="px-6 py-4">
+                    <span class="badge {% if c.is_active %}badge-green{% else %}badge-red{% endif %}">
+                        {% if c.is_active %}Faol{% else %}Nofaol{% endif %}
+                    </span>
+                </td>
+                <td class="px-6 py-4 flex gap-2">
+                    <a href="{% url 'admin_course_edit' c.pk %}" class="btn-admin-edit">
+                        <i class="fa-solid fa-pen-to-square"></i> Tahrirlash
+                    </a>
+                    <a href="{% url 'admin_course_delete' c.pk %}" class="btn-admin-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Hali kurs qo'shilmagan.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

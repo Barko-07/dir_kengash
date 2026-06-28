@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <!-- Header -->
+    <div class="text-center py-12 mb-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Kengash A'zolari</h1>
+        <p class="text-slate-500 text-lg max-w-2xl mx-auto">Direktorlar kengashining asosiy a'zolari va ta'lim sohasidagi tajribali mutaxassislar.</p>
+    </div>
+
+    <!-- Members Grid (from DB) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for m in members %}
+        <div onclick="openMemberModal('{{ m.full_name|escapejs }}', '{{ m.position|escapejs }}', '{{ m.bio|escapejs }}', '{{ m.get_photo }}')"
+             class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group text-center p-8 cursor-pointer hover:-translate-y-1 duration-300">
+            <div class="w-32 h-32 mx-auto rounded-full bg-slate-100 overflow-hidden mb-6 border-4 border-slate-50 group-hover:border-blue-100 transition-colors shadow-sm">
+                <img src="{{ m.get_photo }}" alt="{{ m.full_name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <h3 class="text-xl font-extrabold text-slate-900 mb-1">{{ m.full_name }}</h3>
+            <p class="text-blue-600 text-sm font-bold mb-4 uppercase tracking-wide">{{ m.position }}</p>
+            <p class="text-slate-500 text-sm line-clamp-2 leading-relaxed">{{ m.bio }}</p>
+            {% if m.region or m.phone %}
+            <div class="flex flex-wrap justify-center gap-3 mt-4 pt-4 border-t border-slate-100">
+                {% if m.region %}<span class="text-xs text-slate-400 flex items-center gap-1"><i class="fa-solid fa-location-dot text-blue-400"></i>{{ m.region }}</span>{% endif %}
+                {% if m.phone %}<span class="text-xs text-slate-400 flex items-center gap-1"><i class="fa-solid fa-phone text-green-400"></i>{{ m.phone }}</span>{% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% empty %}
+        <div class="col-span-3 py-20 text-center">
+            <i class="fa-solid fa-users text-4xl text-slate-300 mb-4 block"></i>
+            <p class="text-slate-400 text-lg">Hali a'zo qo'shilmagan.</p>
+            {% if user.is_staff %}
+            <a href="{% url 'admin_member_create' %}" class="inline-flex items-center gap-2 mt-4 text-blue-600 font-semibold text-sm hover:underline">
+                <i class="fa-solid fa-plus"></i> Admin paneldan a'zo qo'shish
+            </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Member Detail Modal -->
+<div id="memberModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeMemberModal()"></div>
+    <div class="relative bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden transform scale-95 transition-transform duration-300" id="memberModalContent">
+        <button onclick="closeMemberModal()" class="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="p-8 text-center">
+            <div class="w-32 h-32 mx-auto rounded-full bg-slate-100 overflow-hidden mb-6 border-4 border-blue-50 shadow-md">
+                <img id="modalImg" src="" alt="Member" class="w-full h-full object-cover">
+            </div>
+            <h3 id="modalName" class="text-2xl font-extrabold text-slate-900 mb-1"></h3>
+            <p id="modalRole" class="text-blue-600 text-sm font-bold mb-6 uppercase tracking-wider"></p>
+            <div class="bg-slate-50 p-6 rounded-2xl text-left border border-slate-100">
+                <div class="flex items-center gap-2 mb-3 text-slate-800 font-bold text-sm"><i class="fa-solid fa-circle-info text-blue-500"></i> Ma'lumot</div>
+                <p id="modalDesc" class="text-slate-600 text-sm leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const modal = document.getElementById('memberModal');
+    const modalContent = document.getElementById('memberModalContent');
+    function openMemberModal(name, role, desc, img) {
+        document.getElementById('modalName').textContent = name;
+        document.getElementById('modalRole').textContent = role;
+        document.getElementById('modalDesc').textContent = desc;
+        document.getElementById('modalImg').src = img;
+        modal.classList.remove('hidden');
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0');
+        modalContent.classList.remove('scale-95');
+    }
+    function closeMemberModal() {
+        modal.classList.add('opacity-0');
+        modalContent.classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMemberModal(); });
+</script>
+{% endblock %}

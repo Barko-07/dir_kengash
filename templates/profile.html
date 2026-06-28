@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto mt-4 animate-slide-up">
+    <!-- Profile Header -->
+    <div
+        class="bg-white border border-slate-200 p-8 rounded-3xl shadow-sm mb-8 flex flex-col md:flex-row items-center gap-8">
+        <div class="relative group">
+            {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Avatar"
+                class="w-32 h-32 rounded-full object-cover border-4 border-slate-100 shadow-md">
+            {% else %}
+            <div
+                class="w-32 h-32 rounded-full bg-slate-100 flex items-center justify-center border-4 border-white shadow-md">
+                <i class="fa-solid fa-user text-5xl text-slate-300"></i>
+            </div>
+            {% endif %}
+
+            <label for="avatar-upload"
+                class="absolute inset-0 bg-black/50 text-white rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity backdrop-blur-sm">
+                <i class="fa-solid fa-camera mb-1"></i>
+                <span class="text-xs font-semibold">O'zgartirish</span>
+            </label>
+        </div>
+
+        <div class="text-center md:text-left flex-grow">
+            <h1 class="text-3xl font-bold text-slate-800 mb-1">{{ user.username }}</h1>
+            <p class="text-primary-600 font-medium flex items-center justify-center md:justify-start">
+                <i class="fa-solid fa-id-badge mr-2"></i> {{ user.get_role_display }}
+            </p>
+            <div class="mt-4 flex gap-4 justify-center md:justify-start">
+                <div class="bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Tugatilgan imtihonlar</p>
+                    <p class="text-xl font-bold text-slate-800">0</p>
+                </div>
+                <div class="bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">O'rtacha ball</p>
+                    <p class="text-xl font-bold text-slate-800">0%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Form -->
+    <div class="bg-white border border-slate-200 p-8 rounded-3xl shadow-sm">
+        <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center">
+            <i class="fa-solid fa-gear mr-3 text-slate-400"></i> Shaxsiy ma'lumotlar
+        </h2>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Hidden avatar input -->
+            <input type="file" id="avatar-upload" name="avatar" accept="image/*" class="hidden">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-slate-700 text-sm font-semibold mb-2">Foydalanuvchi nomi</label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <input type="text" value="{{ user.username }}" disabled
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-slate-500 cursor-not-allowed">
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Loginni o'zgartirib bo'lmaydi.</p>
+                </div>
+
+                <div>
+                    <label class="block text-slate-700 text-sm font-semibold mb-2">Telefon raqam</label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <input type="text" name="phone_number" value="{{ user.phone_number|default:'' }}"
+                            class="w-full bg-white border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow shadow-sm"
+                            placeholder="+998 90 123 45 67">
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex justify-end">
+                <button type="submit"
+                    class="px-8 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 active:scale-[0.98] transition-all shadow-md shadow-primary-500/20 flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i> Saqlash
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Preview image on file select (optional enhancement)
+    document.getElementById('avatar-upload').addEventListener('change', function (e) {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Find the image or the placeholder div
+                let img = document.querySelector('.relative.group img');
+                if (!img) {
+                    const placeholder = document.querySelector('.relative.group > div:not(.bg-black\\/50)');
+                    img = document.createElement('img');
+                    img.className = "w-32 h-32 rounded-full object-cover border-4 border-slate-100 shadow-md";
+                    placeholder.parentNode.insertBefore(img, placeholder);
+                    placeholder.remove();
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+</script>
+{% endblock %}

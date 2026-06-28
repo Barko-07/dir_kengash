@@ -1,0 +1,38 @@
+{% extends 'admin_base.html' %}
+{% block title %}Fotogalereya{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-8">
+    <div>
+        <h1 class="text-2xl font-extrabold text-white mb-1">Fotogalereya</h1>
+        <p class="text-slate-500 text-sm">Jami: {{ photos.count }} rasm</p>
+    </div>
+    <a href="{% url 'admin_gallery_create' %}" class="btn-admin-primary">
+        <i class="fa-solid fa-plus"></i> Rasm qo'shish
+    </a>
+</div>
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {% for p in photos %}
+    <div class="relative group bg-slate-800/50 border border-white/5 rounded-2xl overflow-hidden">
+        {% if p.get_image %}
+        <img src="{{ p.get_image }}" class="w-full h-40 object-cover group-hover:opacity-70 transition-opacity">
+        {% else %}
+        <div class="w-full h-40 bg-slate-700 flex items-center justify-center">
+            <i class="fa-solid fa-image text-slate-500 text-3xl"></i>
+        </div>
+        {% endif %}
+        <div class="p-3">
+            <p class="text-slate-300 text-xs truncate">{{ p.caption|default:"Izohi yo'q" }}</p>
+            <p class="text-slate-600 text-xs mt-1">{{ p.uploaded_at|date:"d.m.Y" }}</p>
+        </div>
+        <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <a href="{% url 'admin_gallery_delete' p.pk %}" class="btn-admin-danger text-xs px-2 py-1">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-4 py-16 text-center text-slate-500">Hali rasm qo'shilmagan.</div>
+    {% endfor %}
+</div>
+{% endblock %}

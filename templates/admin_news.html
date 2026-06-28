@@ -1,0 +1,64 @@
+{% extends 'admin_base.html' %}
+{% block title %}Yangiliklar{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-8">
+    <div>
+        <h1 class="text-2xl font-extrabold text-white mb-1">Yangiliklar</h1>
+        <p class="text-slate-500 text-sm">Jami: {{ news.count }} yangilik</p>
+    </div>
+    <a href="{% url 'admin_news_create' %}" class="btn-admin-primary">
+        <i class="fa-solid fa-plus"></i> Yangilik qo'shish
+    </a>
+</div>
+
+<form method="get" class="mb-6 flex gap-3">
+    <div class="relative flex-1 max-w-sm">
+        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+        <input type="text" name="q" value="{{ q }}" class="admin-input pl-11" placeholder="Yangilik sarlavhasi bo'yicha...">
+    </div>
+    <button type="submit" class="btn-admin-primary">Qidirish</button>
+    {% if q %}<a href="{% url 'admin_news' %}" class="btn-admin-edit">Tozalash</a>{% endif %}
+</form>
+
+<div class="bg-slate-800/50 border border-white/5 rounded-2xl overflow-hidden">
+    <table class="w-full">
+        <thead>
+            <tr class="border-b border-white/5">
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">#</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Sarlavha</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Kategoriya</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Sana</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Holat</th>
+                <th class="text-left px-6 py-4 text-slate-400 font-semibold text-sm">Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for n in news %}
+            <tr class="table-row border-b border-white/5 last:border-0">
+                <td class="px-6 py-4 text-slate-500 text-sm">{{ forloop.counter }}</td>
+                <td class="px-6 py-4 text-white text-sm font-medium max-w-xs truncate">{{ n.title }}</td>
+                <td class="px-6 py-4">
+                    <span class="badge badge-blue">{{ n.get_category_display }}</span>
+                </td>
+                <td class="px-6 py-4 text-slate-400 text-sm">{{ n.published_at }}</td>
+                <td class="px-6 py-4">
+                    <span class="badge {% if n.is_published %}badge-green{% else %}badge-red{% endif %}">
+                        {% if n.is_published %}Nashr{% else %}Yashirin{% endif %}
+                    </span>
+                </td>
+                <td class="px-6 py-4 flex gap-2">
+                    <a href="{% url 'admin_news_edit' n.pk %}" class="btn-admin-edit">
+                        <i class="fa-solid fa-pen-to-square"></i> Tahrirlash
+                    </a>
+                    <a href="{% url 'admin_news_delete' n.pk %}" class="btn-admin-danger">
+                        <i class="fa-solid fa-trash"></i> O'chirish
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="px-6 py-12 text-center text-slate-500">Hali yangilik qo'shilmagan.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
