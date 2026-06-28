@@ -59,6 +59,42 @@ def logout_view(request):
     logout(request)
     return redirect('index')
 
+def setup_view(request):
+    """
+    Birinchi superuser ni sayt orqali yaratish uchun maxfiy sahifa.
+    Agar bazada allaqachon superuser mavjud bo'lsa, forma ko'rsatilmaydi.
+    """
+    already_exists = User.objects.filter(is_superuser=True).exists()
+
+    if request.method == 'POST':
+        if already_exists:
+            return render(request, 'setup.html', {'already_exists': True})
+
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '')
+        password2 = request.POST.get('password2', '')
+
+        if not username:
+            return render(request, 'setup.html', {'error': 'Login kiritilishi shart'})
+        if not password:
+            return render(request, 'setup.html', {'error': 'Parol kiritilishi shart'})
+        if password != password2:
+            return render(request, 'setup.html', {'error': 'Parollar bir xil emas!'})
+        if len(password) < 6:
+            return render(request, 'setup.html', {'error': 'Parol kamida 6 ta belgidan iborat bo\'lishi kerak'})
+        if User.objects.filter(username=username).exists():
+            return render(request, 'setup.html', {'error': 'Bu login allaqachon band'})
+
+        user = User.objects.create_superuser(username=username, email=email, password=password)
+        login(request, user)
+        return render(request, 'setup.html', {
+            'already_exists': True,
+            'success': f'✅ Administrator "{username}" muvaffaqiyatli yaratildi! Endi admin panelga kirishingiz mumkin.'
+        })
+
+    return render(request, 'setup.html', {'already_exists': already_exists})
+
 @login_required
 def dashboard_view(request):
     return render(request, 'dashboard.html', {'user': request.user})
