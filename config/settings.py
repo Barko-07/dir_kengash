@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from datetime import timedelta
-
+import dj_database_url
 JAZZMIN_SETTINGS = {
     "site_title": "DirKengash Admin",
     "site_header": "DirKengash",
@@ -128,7 +128,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-import dj_database_url
 
 DATABASES = {
     'default': {
