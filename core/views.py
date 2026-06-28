@@ -35,24 +35,36 @@ def login_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
-        email = request.POST.get('email', '').strip()
-        password = request.POST.get('password', '').strip()
-        role = request.POST.get('role', 'direktor')
+        username = (request.POST.get('username') or '').strip()
+        email = (request.POST.get('email') or '').strip()
+        password = (request.POST.get('password') or '').strip()
+        role_raw = request.POST.get('role', 'TEACHER')
+        # HTML formadagi qiymatlarni model qiymatlarga moslashtirish
+        role_map = {'direktor': 'DIRECTOR', 'pedagog': 'TEACHER'}
+        role = role_map.get(role_raw, role_raw)
 
         if not username:
-            return render(request, 'register.html', {'error': 'Foydalanuvchi nomi kiritilishi shart'})
+            return render(request, 'register.html', {'error': 'Foydalanuvchi nomini kiriting!'})
         if not password:
-            return render(request, 'register.html', {'error': 'Parol kiritilishi shart'})
-
+            return render(request, 'register.html', {'error': 'Parolni kiriting!'})
+        if len(password) < 6:
+            return render(request, 'register.html', {'error': 'Parol kamida 6 ta belgidan iborat bo\'lishi kerak!'})
         if User.objects.filter(username=username).exists():
-            return render(request, 'register.html', {'error': 'Bu foydalanuvchi nomi band'})
+            return render(request, 'register.html', {'error': 'Bu foydalanuvchi nomi band!'})
 
-        user = User.objects.create_user(username=username, email=email, password=password)
-        user.role = role
-        user.save()
-        login(request, user)
-        return redirect('dashboard')
+        try:
+            user = User.objects.create_user(
+                username=username,
+                email=email if email else '',
+                password=password
+            )
+            user.role = role
+            user.save()
+            login(request, user)
+            return redirect('dashboard')
+        except Exception as e:
+            return render(request, 'register.html', {'error': f'Xatolik yuz berdi: {str(e)}'})
+
     return render(request, 'register.html')
 
 def logout_view(request):
